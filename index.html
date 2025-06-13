@@ -1,0 +1,58 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <section id="readme-section">
+  <h2>Sobre este proyecto</h2>
+  <div id="readme-content">Cargando descripción...</div>
+</section>
+
+  <meta charset="UTF-8">
+  <title>Campeonato FIFA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  fetch('README.md')
+    .then(res => res.text())
+    .then(md => {
+      document.getElementById('readme-content').innerHTML = marked.parse(md);
+    })
+    .catch(err => {
+      document.getElementById('readme-content').innerText = 'No se pudo cargar el README.';
+      console.error(err);
+    });
+</script>
+
+  <div class="container">
+    <h1>⚽ Campeonato FIFA - Versus Aleatorio ⚽</h1>
+    <button onclick="elegirVersus()">Generar Versus</button>
+    <button onclick="resetearCampeonato()">🔁 Reiniciar Campeonato</button>
+    <button onclick="exportarTabla()">📄 Exportar a Excel</button>
+    <button onclick="cambiarTema()">🎨 Cambiar Tema</button>
+    <button onclick="mostrarPremios()">🏅 Premios</button>
+    <button onclick="generarQR('https://tupagina.github.io')">📲 Código QR</button>
+
+    <div id="resultado" class="versus"></div>
+    <div id="ingresoGoles" style="margin-top:20px;"></div>
+
+    <h2>📊 Tabla de Posiciones</h2>
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>Jugador</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th>
+          <th>GF</th><th>GC</th><th>DG</th><th>Pts</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-estadisticas"></tbody>
+    </table>
+
+    <div id="premios" style="margin-top: 30px;"></div>
+    <div id="qr" style="margin-top: 30px; text-align: center;"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
